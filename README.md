@@ -1,8 +1,7 @@
 # Generic Parametric Printable Box
-Generic, parametric, printable box made with FreeCAD 1.0. 
-
+Generic, parametric, printable box for makers working on DIY-electronics-projects.
 Released as:
-- FCStd (for native modifications)
+- FCStd (for native modifications in FreeCAD 1.0 and newer)
 - STEP (for modifications in any CAD software)
 - STL (for 3D printing)
 
