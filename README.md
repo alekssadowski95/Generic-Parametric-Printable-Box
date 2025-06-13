@@ -1,4 +1,4 @@
-# Generic-Parametric-Printable-Box
+# Generic Parametric Printable Box
 Generic, parametric, printable box made with FreeCAD 1.0. 
 
 Released as:
