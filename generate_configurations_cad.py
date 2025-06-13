@@ -1,29 +1,46 @@
 import sys
 import os
 
-import pandas as pd
+from PySide2.QtWidgets import QMessageBox
 
 
-# Load the spreadsheet
-file_name = "box_configurations.xlsx"
-df = pd.read_excel(os.path.join(os.path.dirname(__file__), file_name))
+doc = FreeCAD.ActiveDocument
 
-print(df)
+params_sheet = doc.Spreadsheet
+configurations_sheet = doc.Spreadsheet001
 
-# Add path to FreeCAD Python interface
-# path to your FreeCAD.so or FreeCAD.dll file
-FREECAD_ABS_PATH = 'C:/Users/Work/Downloads/FreeCAD-0.21.2-Windows-x86_64\FreeCAD_0.21.2-2023-12-17-conda-Windows-x86_64-py310/bin'
-sys.path.append(FREECAD_ABS_PATH)
 
-# import the FreeCAD Python interface
-try:
-    import FreeCAD
-    print('The FreeCAD Python interface has been loaded. ')
-except:
-    print('FreeCAD API not found. Check that your installed external Python interpreter has the same version as the FreeCAD internal interpreter.')
 
-doc_path = os.path.join(os.path.dirname(__file__), 'generic_parametric_printable_box.FCStd')
-print(doc_path)
-doc = FreeCAD.openDocument(doc_path)
+for i in range(2, 10000):
+	if configurations_sheet.get("A"+str(i)):
+		partname = configurations_sheet.get("A" + str(i))
+		inside_length = configurations_sheet.get("B" + str(i))
+		inside_width = configurations_sheet.get("C" + str(i))
+		box_inside_height = configurations_sheet.get("D" + str(i))
+		print(inside_length, inside_width, box_inside_height)
+		params_sheet.set('inside_length', str(inside_length))
+		params_sheet.set('inside_width', str(inside_width))
+		params_sheet.set('box_inside_height', str(box_inside_height))
+		doc.recompute()
+		
+		### Begin command Std_Export
+		__objs__ = []
+		__objs__.append(doc.getObject("Body010"))
+		__objs__.append(doc.getObject("Body011"))
 
-print(doc)
+		if __objs__:
+			export_filepath = os.path.join(os.path.dirname(__file__), "dist", f'{str(partname)}_{str(inside_length)}_{str(inside_width)}_{str(box_inside_height)}_regular.step')
+			Part.export(__objs__, export_filepath)
+		else:
+			pass
+		del __objs__
+		### End command Std_Export
+	else:
+		break
+
+# Show a message box
+msg_box = QMessageBox()
+msg_box.setWindowTitle("Configuration Assist")
+msg_box.setText("Generating all configurations has finished.")
+msg_box.setIcon(QMessageBox.Information)
+msg_box.exec_()
