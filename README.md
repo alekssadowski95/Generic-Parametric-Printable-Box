@@ -1,5 +1,5 @@
 # Generic Parametric Printable Box
-Generic, parametric, printable box for makers working on DIY-electronics-projects.
+Directly downloadable generic, parametric, printable boxes for makers working on DIY-electronics-projects.
 
 Released as:
 - FCStd (for native modifications in FreeCAD 1.0 and newer)
@@ -11,7 +11,7 @@ Released as:
 
 ## Configurations
 
-| Partnumber   |   inside_length (mm) |   inside_width (mm) |   box_inside_height (mm) |   box_thickness (mm) | Download_Link                                                                                                                               |
+| Partnumber   |   inside_length (mm) |   inside_width (mm) |   box_inside_height (mm) |   box_thickness (mm) | Download_Link (STEP)                                                                                                                               |
 |:-------------|---------------------:|--------------------:|-------------------------:|---------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------|
 | GPPB-00001   |                   88 |                  34 |                       27 |                  1.5 | [Download](https://github.com/alekssadowski95/Generic-Parametric-Printable-Box/releases/latest/download/GPPB-00001_88_34_27_regular.step)   |
 | GPPB-00002   |                   25 |                  25 |                       25 |                  1.5 | [Download](https://github.com/alekssadowski95/Generic-Parametric-Printable-Box/releases/latest/download/GPPB-00002_25_25_25_regular.step)   |
