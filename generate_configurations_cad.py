@@ -1,17 +1,33 @@
 import sys
 import os
 
-from PySide2.QtWidgets import QMessageBox
+from PySide6.QtWidgets import QApplication, QMessageBox
 
 
-doc = FreeCAD.ActiveDocument
+# Create the application instance
+app = QApplication(sys.argv)
+
+FREECAD_ABS_PATH = 'C:/Users/Work/Downloads/FreeCAD_1.0.1-conda-Windows-x86_64-py311/bin'
+sys.path.append(FREECAD_ABS_PATH)
+
+freecad_file_name = "generic_parametric_printable_box.FCStd"
+PROJECT_DIR = os.path.dirname(__file__)
+freecad_file_dir = os.path.join(PROJECT_DIR, freecad_file_name)
+
+# import the FreeCAD Python interface
+try:
+    import FreeCAD
+    print('The FreeCAD Python interface has been loaded')
+except:
+    print('FreeCAD API not found. Please check the FREECAD_ABS_PATH variable.')
+
+doc = FreeCAD.openDocument(freecad_file_dir)
 
 params_sheet = doc.Spreadsheet
 configurations_sheet = doc.Spreadsheet001
 
 
-
-for i in range(2, 10000):
+for i in range(2, 6):
 	if configurations_sheet.get("A"+str(i)):
 		partname = configurations_sheet.get("A" + str(i))
 		inside_length = configurations_sheet.get("B" + str(i))
@@ -44,3 +60,6 @@ msg_box.setWindowTitle("Configuration Assist")
 msg_box.setText("Generating all configurations has finished.")
 msg_box.setIcon(QMessageBox.Information)
 msg_box.exec_()
+
+# Exit the application
+sys.exit(0)
